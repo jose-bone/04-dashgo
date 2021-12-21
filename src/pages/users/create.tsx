@@ -8,6 +8,9 @@ import {
   SimpleGrid,
   Button,
 } from "@chakra-ui/react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 
 import { Input } from "../../components/Form/Input";
@@ -84,20 +87,6 @@ export default function CreateUser() {
                 {...register("email")}
               />
             </SimpleGrid>
-
-  const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(createUserFormSchema),
-  });
-
-  const { errors } = formState;
-
-  const handleCreateUser: SubmitHandler<CreateUserFormData> = async (
-    values
-  ) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    console.log(values)
-  };
 
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
               <Input
