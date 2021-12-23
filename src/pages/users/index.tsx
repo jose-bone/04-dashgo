@@ -81,21 +81,20 @@ export default function UserList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data.map((user) => {
-                    return (
-                      <Tr key={user.id}>
-                        <Td px={["4", "4", "6"]}>
-                          <Checkbox colorScheme="pink" />
-                        </Td>
-                        <Td>
-                          <Box>
-                            <Text fontWeight="bold">{user.name}</Text>
-                            <Text fontSize="sm" color="gray.300">
-                              {user.email}
-                            </Text>
-                          </Box>
-                        </Td>
-                        {isWideVersion && <Td>{user.createdAt}</Td>}
+                  {data.map((user) => (
+                    <Tr key={user.id}>
+                      <Td px={["4", "4", "6"]}>
+                        <Checkbox colorScheme="pink" />
+                      </Td>
+                      <Td>
+                        <Box>
+                          <Text fontWeight="bold">{user.name}</Text>
+                          <Text fontSize="sm" color="gray.300">
+                            {user.email}
+                          </Text>
+                        </Box>
+                      </Td>
+                      {isWideVersion && <Td>{user.createdAt}</Td>}
                       </Tr>
                     );
                   })}
