@@ -22,6 +22,15 @@ import { Sidebar } from "../../components/Sidebar";
 import Link from "next/link";
 
 export default function UserList() {
+  const { data, isLoading, error } = useQuery("users", async () => {
+    const response = await fetch("http://localhost:3000/api/users");
+    const data = await response.json();
+
+    return data;
+  });
+
+  console.log(query);
+
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
@@ -52,67 +61,79 @@ export default function UserList() {
             </Link>
           </Flex>
 
-          <Table colorScheme="whiteAlpha">
-            <Thead>
-              <Tr>
-                <Th px={["4", "4", "6"]} color="gray.300" w="8">
-                  <Checkbox colorScheme="pink" />
-                </Th>
-                <Th>Usuário</Th>
-                {isWideVersion && <Th>Data de Cadastro</Th>}
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                <Td px={["4", "4", "6"]}>
-                  <Checkbox colorScheme="pink" />
-                </Td>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">José Boné</Text>
-                    <Text fontSize="sm" color="gray.300">
-                      bjosemateus@gmail.com
-                    </Text>
-                  </Box>
-                </Td>
-                {isWideVersion && <Td>20 de Dezembro de 2021</Td>}
-              </Tr>
-            </Tbody>
-            <Tbody>
-              <Tr>
-                <Td px={["4", "4", "6"]}>
-                  <Checkbox colorScheme="pink" />
-                </Td>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">José Boné</Text>
-                    <Text fontSize="sm" color="gray.300">
-                      bjosemateus@gmail.com
-                    </Text>
-                  </Box>
-                </Td>
-                {isWideVersion && <Td>20 de Dezembro de 2021</Td>}
-              </Tr>
-            </Tbody>
-            <Tbody>
-              <Tr>
-                <Td px={["4", "4", "6"]}>
-                  <Checkbox colorScheme="pink" />
-                </Td>
-                <Td>
-                  <Box>
-                    <Text fontWeight="bold">José Boné</Text>
-                    <Text fontSize="sm" color="gray.300">
-                      bjosemateus@gmail.com
-                    </Text>
-                  </Box>
-                </Td>
-                {isWideVersion && <Td>20 de Dezembro de 2021</Td>}
-              </Tr>
-            </Tbody>
-          </Table>
+          {isLoading ? (
+            <Flex justify="center">
+              <Spinner />
+            </Flex>
+          ) : error ? (
+            <Flex justify="center">
+              <Text>Falha ao obter dados dos usuários</Text>
+            </Flex>
+          ) : (
+            <>
+              <Table colorScheme="whiteAlpha">
+                <Thead>
+                  <Tr>
+                    <Th px={["4", "4", "6"]} color="gray.300" w="8">
+                      <Checkbox colorScheme="pink" />
+                    </Th>
+                    <Th>Usuário</Th>
+                    {isWideVersion && <Th>Data de Cadastro</Th>}
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td px={["4", "4", "6"]}>
+                      <Checkbox colorScheme="pink" />
+                    </Td>
+                    <Td>
+                      <Box>
+                        <Text fontWeight="bold">José Boné</Text>
+                        <Text fontSize="sm" color="gray.300">
+                          bjosemateus@gmail.com
+                        </Text>
+                      </Box>
+                    </Td>
+                    {isWideVersion && <Td>20 de Dezembro de 2021</Td>}
+                  </Tr>
+                </Tbody>
+                <Tbody>
+                  <Tr>
+                    <Td px={["4", "4", "6"]}>
+                      <Checkbox colorScheme="pink" />
+                    </Td>
+                    <Td>
+                      <Box>
+                        <Text fontWeight="bold">José Boné</Text>
+                        <Text fontSize="sm" color="gray.300">
+                          bjosemateus@gmail.com
+                        </Text>
+                      </Box>
+                    </Td>
+                    {isWideVersion && <Td>20 de Dezembro de 2021</Td>}
+                  </Tr>
+                </Tbody>
+                <Tbody>
+                  <Tr>
+                    <Td px={["4", "4", "6"]}>
+                      <Checkbox colorScheme="pink" />
+                    </Td>
+                    <Td>
+                      <Box>
+                        <Text fontWeight="bold">José Boné</Text>
+                        <Text fontSize="sm" color="gray.300">
+                          bjosemateus@gmail.com
+                        </Text>
+                      </Box>
+                    </Td>
+                    {isWideVersion && <Td>20 de Dezembro de 2021</Td>}
+                  </Tr>
+                </Tbody>
+              </Table>
 
-          <Pagination />
+              <Pagination />
+            </>
+          )}
         </Box>
       </Flex>
     </Box>
