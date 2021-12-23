@@ -1,4 +1,4 @@
-import Link from "next/link";
+import NextLink from "next/link";
 import {
   Box,
   Flex,
@@ -15,14 +15,17 @@ import {
   Text,
   useBreakpointValue,
   Spinner,
+  Link,
 } from "@chakra-ui/react";
-import { RiAddLine } from "react-icons/ri";
-import { useEffect } from "react";
-import { useQuery } from "react-query";
+import { RiAddLine, RiPencilLine } from "react-icons/ri";
+import { useState } from "react";
 
 import { Pagination } from "../../components/Pagination";
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
+import { useUsers } from "../../services/hooks/useUsers";
+import { api } from "../../services/api";
+import { queryClient } from "../../services/queryClient";
 
 export default function UserList() {
   const [page, setPage] = useState(1);
@@ -96,26 +99,29 @@ export default function UserList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data.users.map((user) => (
-                    <Tr key={user.id}>
-                      <Td px={["4", "4", "6"]}>
-                        <Checkbox colorScheme="pink" />
-                      </Td>
-                      <Td>
-                        <Box>
-                          <Link
-                            color="purple.400"
-                            onMouseEnter={() => handlePrefetchUser(user.id)}
-                          >
-                            <Text fontWeight="bold">{user.name}</Text>
-                          </Link>
-                          <Text fontSize="sm" color="gray.300">
-                            {user.email}
-                          </Text>
-                        </Box>
-                      </Td>
-                      {isWideVersion && <Td>{user.createdAt}</Td>}
-                      </Tr>
+                  {data.users.map((user) => {
+                    return (
+                      <>
+                        <Tr key={user.id}>
+                          <Td px={["4", "4", "6"]}>
+                            <Checkbox colorScheme="pink" />
+                          </Td>
+                          <Td>
+                            <Box>
+                              <Link
+                                color="purple.400"
+                                onMouseEnter={() => handlePrefetchUser(user.id)}
+                              >
+                                <Text fontWeight="bold">{user.name}</Text>
+                              </Link>
+                              <Text fontSize="sm" color="gray.300">
+                                {user.email}
+                              </Text>
+                            </Box>
+                          </Td>
+                          {isWideVersion && <Td>{user.createdAt}</Td>}
+                        </Tr>
+                      </>
                     );
                   })}
                 </Tbody>
