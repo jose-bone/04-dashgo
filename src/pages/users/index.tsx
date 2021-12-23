@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Box,
   Flex,
@@ -13,13 +14,15 @@ import {
   Checkbox,
   Text,
   useBreakpointValue,
+  Spinner,
 } from "@chakra-ui/react";
-import { RiAddLine, RiPencilLine } from "react-icons/ri";
+import { RiAddLine } from "react-icons/ri";
+import { useEffect } from "react";
+import { useQuery } from "react-query";
 
 import { Pagination } from "../../components/Pagination";
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
-import Link from "next/link";
 
 export default function UserList() {
   const { data, isLoading, error } = useQuery(
