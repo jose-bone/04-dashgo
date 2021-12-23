@@ -25,7 +25,8 @@ import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 
 export default function UserList() {
-  const { data, isLoading, isFetching, error } = useUsers();
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isFetching, error } = useUsers(page);
 
   const isWideVersion = useBreakpointValue({
     base: false,
