@@ -5,6 +5,11 @@ import { theme } from "../styles/theme";
 import { SidebarDrawerProvider } from "../contexts/SidebarDrawerContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+  if(process.env.NODE_ENV === 'development'){
+    makeServer()
+  }
+
   return (
     <ChakraProvider theme={theme}>
       <SidebarDrawerProvider>
